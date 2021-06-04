@@ -1,5 +1,21 @@
 """This module contains a two classes for creating pokemon."""
 
+from random import randint
+
+
+def repeat(m):
+    """Decorator-function allows decorated function to repeat m times."""
+
+    def inner(func_object):
+        def wrapper(*args, **kwargs):
+            print("Repeat ", m, " times")
+            for i in range(m):
+                func_object(*args, **kwargs)
+
+        return wrapper
+
+    return inner
+
 
 class Pokemon(object):
     """
@@ -13,15 +29,22 @@ class Pokemon(object):
      :type moves: list
     """
 
+    repeat_max = 10
+
     def __init__(self, name, nickname):
         """Initialise Pokemon class."""
         self.name = name
         self.nickname = nickname
         self.moves = ["jump", "strike", "dash", "block"]
 
+    @repeat(randint(0, repeat_max))
     def speak(self):
-        """Pokemon say name."""
-        print("\n" + self.name.upper() + " " + self.name.upper() + "!")
+        """Pokemon say name and repeat random times."""
+        print(self.name)
+
+    def speak_once(self):
+        """Pokemon say name once."""
+        print(self.name)
 
     def learn_move(self, new_move):
         """Pokemon learn a new move."""
@@ -67,13 +90,5 @@ class ElectricPokemon(Pokemon):
         print("\nSPECIES TYPE:", self.pokemon_type, "\n")
 
 
-p = Pokemon("pikachu", "pika")
-p.speak()
-p.print_details()
-print("")
-p.learn_move("glide")
-p.print_details()
-print("")
-e = ElectricPokemon("slowpoke", "poke", "psychic")
-e.speak()
-e.print_details()
+# p = Pokemon("pikachu", "pika")
+# p.speak()
