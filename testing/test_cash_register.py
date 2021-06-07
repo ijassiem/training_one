@@ -4,10 +4,9 @@ import cash_register.cash_register as cr
 import unittest
 
 """
-This is an example docstring.
+This module contains a class for testing the cash_register module.
 
-A docstring with a summary line, a blank line
-and some more text like here.
+There are several test methods for testing the cash_register module.
 """
 
 

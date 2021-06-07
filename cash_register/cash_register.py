@@ -14,8 +14,8 @@ def total(list):
 
 
 def vat(value):
-    """Calculate VAT."""
-    return round(value * 0.14, 2)
+    """Calculate VAT at 15%."""
+    return round(value * 0.15, 2)
 
 
 def add(x, y):
