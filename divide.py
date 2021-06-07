@@ -1,11 +1,10 @@
 """
-This is an example docstring.
+This module contains a divide function.
 
-A docstring with a summary line, a blank line
-and some more text like here.
+This divide function takes two arguments, peforms division and returns the result.
 """
 
 
 def divide(a, b):
-    """Divide two numbers."""
-    return a * b
+    """Return the quotient of two numbers."""
+    return a / b
