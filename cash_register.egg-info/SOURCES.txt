@@ -7,3 +7,5 @@ cash_register.egg-info/PKG-INFO
 cash_register.egg-info/SOURCES.txt
 cash_register.egg-info/dependency_links.txt
 cash_register.egg-info/top_level.txt
+pokemon/__init__.py
+pokemon/pokemon.py
