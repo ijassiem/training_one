@@ -4,16 +4,21 @@ from random import randint
 
 
 def repeat(m):
-    """Decorator-function allows decorated function to repeat m times."""
+    """Decorator-function allows decorated function to repeat random number of times, ranging from 0 to m.
+
+    Parameters
+    ----------
+    m : int
+        The value of the maximum random number allowed to be generated.
+    """
 
     def inner(func_object):
         def wrapper(*args, **kwargs):
-            print("Repeat ", m, " times")
-            for i in range(m):
+            rand_num = randint(0, m)
+            print(f"Repeat {rand_num} times")
+            for i in range(rand_num):
                 func_object(*args, **kwargs)
-
         return wrapper
-
     return inner
 
 
@@ -37,7 +42,7 @@ class Pokemon(object):
         self.nickname = nickname
         self.moves = ["jump", "strike", "dash", "block"]
 
-    @repeat(randint(0, repeat_max))
+    @repeat(repeat_max)
     def speak(self):
         """Pokemon say name and repeat random times."""
         print(self.name)
@@ -53,11 +58,12 @@ class Pokemon(object):
 
     def print_details(self):
         """Print all details of pokemon."""
-        print("\nNAME:", self.name)
-        print("NICKNAME:", self.nickname)
+        print(f"NAME: {self.name}")
+        print(f"NICKNAME: {self.nickname}")
         print("MOVES:", end=" ")
         for i in self.moves:
             print(i, end=" ")
+        print()
 
 
 class ElectricPokemon(Pokemon):
@@ -87,8 +93,18 @@ class ElectricPokemon(Pokemon):
         # for i in self.moves:
         #    print(i, end=" ")
         super(ElectricPokemon, self).print_details()
-        print("\nSPECIES TYPE:", self.pokemon_type, "\n")
+        print(f"SPECIES TYPE: {self.pokemon_type}")
 
 
-# p = Pokemon("pikachu", "pika")
-# p.speak()
+p = Pokemon("pikachu", "pika")
+p.speak()
+p.speak()
+p.speak()
+p.print_details()
+
+e = ElectricPokemon("charmander", "char", "fire")
+e.speak()
+e.speak()
+e.speak()
+e.print_details()
+
