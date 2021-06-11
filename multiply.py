@@ -1,11 +1,10 @@
 """
-This is an example docstring.
+This module contains a multiply function.
 
-A docstring with a summary line, a blank line
-and some more text like here.
+This multiply function takes two arguments, peforms multiplication and returns the result.
 """
 
 
 def multiply(a, b):
-    """Multiply two numbers."""
+    """Return the product of two numbers."""
     return a * b
