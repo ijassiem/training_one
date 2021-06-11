@@ -50,14 +50,29 @@ class TestPokemon(unittest.TestCase):
         """Output capture with pytest."""
         self.capsys = capsys
 
-    def test_speak(self):
-        """Test speak method output to console."""
-        my_pokemon = p.Pokemon("charmander", "char")
-        my_pokemon.speak()
+    def test_speak_once(self):
+        """Test speak method output with pytest capture."""
+        name = "charmander"
+        my_pokemon = p.Pokemon(name, "char")
+        my_pokemon.speak_once()
         captured = self.capsys.readouterr()
-        self.assertEqual("\nCHARMANDER CHARMANDER!\n", captured.out)
+        self.assertEqual(name + "\n", captured.out)
 
     def test_species(self):
         """Test species type."""
-        my_pokemon = p.ElectricPokemon("slowpoke", "poke", "psychic")
-        assert my_pokemon.pokemon_type == "psychic"
+        species = "psychic"
+        my_pokemon = p.ElectricPokemon("slowpoke", "poke", species)
+        assert my_pokemon.pokemon_type == species
+
+    def test_no_of_repeats(self):
+        """Checks the number of repeats of speak method does not exceed the maximum repeats."""
+        name = "pikachu"
+        my_pokemon = p.Pokemon(name, "pika")
+        max_value = p.Pokemon.repeat_max
+        my_pokemon.speak()
+        captured = self.capsys.readouterr()
+        num_speak = captured.out.count("pikachu")
+        # print("Captured out: ", captured.out.count("pikachu"))
+        # print("max_value ", max_value)
+        # print("num_speak ", num_speak)
+        assert num_speak <= max_value

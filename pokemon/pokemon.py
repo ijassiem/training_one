@@ -1,5 +1,26 @@
 """This module contains a two classes for creating pokemon."""
 
+from random import randint
+
+
+def repeat(m):
+    """Decorator-function allows decorated function to repeat random number of times, ranging from 0 to m.
+
+    Parameters
+    ----------
+    m : int
+        The value of the maximum random number allowed to be generated.
+    """
+
+    def inner(func_object):
+        def wrapper(*args, **kwargs):
+            rand_num = randint(0, m)
+            print(f"Repeat {rand_num} times")
+            for i in range(rand_num):
+                func_object(*args, **kwargs)
+        return wrapper
+    return inner
+
 
 class Pokemon(object):
     """
@@ -15,6 +36,8 @@ class Pokemon(object):
         A list of 4 pokemon moves.
     """
 
+    repeat_max = 10
+
     def __init__(self, name, nickname):
         """Initialise Pokemon class object with a name and nickname.
 
@@ -29,9 +52,14 @@ class Pokemon(object):
         self.nickname = nickname
         self.moves = ["jump", "strike", "dash", "block"]
 
+    @repeat(repeat_max)
     def speak(self):
-        """Print the name of pokemon."""
-        print("\n" + self.name.upper() + " " + self.name.upper() + "!")
+        """Print the name of pokemon and repeat number of random times."""
+        print(self.name)
+
+    def speak_once(self):
+        """Print the name of pokemon once."""
+        print(self.name)
 
     def learn_move(self, new_move):
         """Add a new move to the list of the pokemon moves. The first item in list is removed.
@@ -46,11 +74,12 @@ class Pokemon(object):
 
     def print_details(self):
         """Print all details of pokemon."""
-        print("\nNAME:", self.name)
-        print("NICKNAME:", self.nickname)
+        print(f"NAME: {self.name}")
+        print(f"NICKNAME: {self.nickname}")
         print("MOVES:", end=" ")
         for i in self.moves:
             print(i, end=" ")
+        print()
 
 
 class ElectricPokemon(Pokemon):
@@ -92,16 +121,18 @@ class ElectricPokemon(Pokemon):
         # for i in self.moves:
         #    print(i, end=" ")
         super(ElectricPokemon, self).print_details()
-        print("\nSPECIES TYPE:", self.pokemon_type, "\n")
+        print(f"SPECIES TYPE: {self.pokemon_type}")
 
 if __name__ == '__main__':
     p = Pokemon("pikachu", "pika")
     p.speak()
-    p.print_details()
-    print("")
+    p.speak()
+    p.speak()
     p.learn_move("glide")
     p.print_details()
-    print("")
-    e = ElectricPokemon("slowpoke", "poke", "psychic")
+
+    e = ElectricPokemon("charmander", "char", "fire")
+    e.speak()
+    e.speak()
     e.speak()
     e.print_details()
