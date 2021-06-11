@@ -1,6 +1,6 @@
 """Test module."""
 
-import lucas.lucas as p
+import lucas.lucas as luc
 import unittest
 
 """This module contains a class for testing the lucas module."""
@@ -17,18 +17,14 @@ class TestPokemon(unittest.TestCase):
 
     def test_lucas_class_iterator(self):
         """Test lucas class iterator."""
-        my_obj = p.MyLucas(1000)
-        cnt = 0
-        for val in my_obj:
+        my_obj = luc.MyLucas(1000)
+        for cnt, val in enumerate(my_obj):
             print(val, "---", self.LUCAS_LIST[cnt])
             assert val == self.LUCAS_LIST[cnt]
-            cnt += 1
 
     def test_lucas_generator(self):
         """Test lucas generator function."""
-        my_lucas = p.lucas(1000)
-        cnt = 0
-        for value in my_lucas:
+        my_lucas = luc.lucas(1000)
+        for cnt, value in enumerate(my_lucas):
             print(value, "---", self.LUCAS_LIST[cnt])
             assert value == self.LUCAS_LIST[cnt]
-            cnt += 1

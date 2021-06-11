@@ -16,7 +16,7 @@ class MyLucas:
 
         Returns
         ------
-        obj
+        MyLucas object
             MyLucas class object as an iterator..
         """
         self.a = 2
