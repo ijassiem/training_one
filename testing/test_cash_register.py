@@ -26,12 +26,12 @@ class Test1(unittest.TestCase):
     def test_vat_integer(self):
         """Test vat calculation with integer as input."""
         value = 58
-        self.assertAlmostEqual(cr.vat(value), value * 0.14, places=2)
+        self.assertAlmostEqual(cr.vat(value), value * 0.15, places=2)
 
     def test_vat_float(self):
         """Test vat calculation with float as input."""
         value = 412.32
-        self.assertAlmostEqual(cr.vat(value), value * 0.14, places=2)
+        self.assertAlmostEqual(cr.vat(value), value * 0.15, places=2)
 
     def test_add_integer(self):
         """Test add function with integers as input."""
