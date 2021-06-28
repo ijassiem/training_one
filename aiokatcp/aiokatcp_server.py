@@ -4,13 +4,18 @@ import aiokatcp
 import asyncio
 import datetime
 
-class MyServer(aiokatcp.DeviceServer):
-    """This class inherits from the aiokatcp DeviceServer class.
 
-    This class is used to create an aiokatcp server object.
+class MyServer(aiokatcp.DeviceServer):
+    """Example of derived class for aiokatcp server.
+
+       This class is required for implementing an aiokatcp server. The class inherits
+       from the aiokatcp.DeviceServer base class required for running an aiokatcp server.
+       Methods are added to the class for replying to current date and time requests, and
+       echoing commands sent by client.
     """
-    VERSION = 'myserver-api-1.0'
-    BUILD_STATE = 'myserver-1.0.1.dev0'
+
+    VERSION = "myserver-api-1.0"
+    BUILD_STATE = "myserver-1.0.1.dev0"
 
     async def request_time(self, ctx):
         """Reply with current date and time.
@@ -32,13 +37,14 @@ class MyServer(aiokatcp.DeviceServer):
         """
         return tuple(args)
 
+
 async def main():
-    """Co-routine starts aiokatcp server."""
-    server = MyServer('localhost', 4444)
+    """Start aiokatcp server and reply to requests from client."""
+    server = MyServer("localhost", 4444)
     await server.start()
     await server.join()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     asyncio.get_event_loop().run_until_complete(main())
     asyncio.get_event_loop().close()

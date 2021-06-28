@@ -3,24 +3,26 @@
 import asyncio
 import aiokatcp
 
-IP_ADDRESS = 'localhost'
+IP_ADDRESS = "localhost"
 PORT = 4444
 
+
 async def run_client():
-    """Co-routine starts an aiokatcp client with requests to server."""
+    """Start aiokatcp client, connect to server and make some requests."""
     client = await aiokatcp.Client.connect(IP_ADDRESS, PORT)
     async with client:
-        reply, informs = await client.request('time')
+        reply, informs = await client.request("time")
         for r in reply:
-            print(r.decode('ascii'))
-        print('----------------------')
-        reply, informs = await client.request('help')
+            print(r.decode("ascii"))
+        print("----------------------")
+        reply, informs = await client.request("help")
         for inform in informs:
-            print(b' '.join(inform.arguments).decode('ascii'))
-        print('----------------------')
-        value, _ = await client.request('echo', 'Hello','Goodbye')
+            print(b" ".join(inform.arguments).decode("ascii"))
+        print("----------------------")
+        value, _ = await client.request("echo", "Hello", "Goodbye")
         for v in value:
-            print(v.decode('ascii'))
+            print(v.decode("ascii"))
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     asyncio.get_event_loop().run_until_complete(run_client())
