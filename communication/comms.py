@@ -51,7 +51,7 @@ class Comms(pkmn.ElectricPokemon):
         super(Comms, self).__init__(name, nickname, pokemon_type)
 
     async def msg_tx(self, message, writer):
-        """Co-routine writes message to socket.
+        """Write message to socket.
 
         Parameters
         ----------
@@ -60,12 +60,12 @@ class Comms(pkmn.ElectricPokemon):
         writer :  StreamWriter object
             Object instance of StreamWriter class for writing to socket.
         """
-        print(f"Sent: {message!r}")
+        print(f"Sending: {message!r}")
         writer.write(message.encode())
         await writer.drain()
 
-    async def list_tasks(self, writer):  # noqa: D301
-        """Co-routine create a random number of tasks for writing messages to socket.
+    async def random_num_tasks(self, writer):
+        r"""Create random number of tasks for writing messages to socket.
 
         Each message ends with a \n. Multiple messages are sent as a group
         of messages, and gets terminated with 'EOM' to indicate the end of transmission.
@@ -85,7 +85,7 @@ class Comms(pkmn.ElectricPokemon):
         await self.msg_tx("EOM\n", writer)
 
     async def read_data(self, reader):
-        """Co-routine reads from socket.
+        """Read asynchronously from socket.
 
         The reading of data is carried out in a while loop. All received messages are stored in list.
         Breaks out of while loop if a message is received containing 'EOM' or 'last message'
@@ -136,7 +136,7 @@ class Comms(pkmn.ElectricPokemon):
 
         while True:
             if not first_msg:
-                await self.list_tasks(writer)
+                await self.random_num_tasks(writer)
             num_msgs, end = await self.read_data(reader)
             first_msg = False
             if num_msgs == 2:
@@ -168,7 +168,7 @@ class Comms(pkmn.ElectricPokemon):
         """
         reader, writer = await asyncio.open_connection(self.ip_address, self.port_no)
         while True:
-            await self.list_tasks(writer)
+            await self.random_num_tasks(writer)
             num_msgs, end = await self.read_data(reader)
             if num_msgs == 2:
                 print(f"Number of msgs received = {num_msgs - 1}")
