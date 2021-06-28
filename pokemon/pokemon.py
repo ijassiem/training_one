@@ -18,7 +18,9 @@ def repeat(m):
             print(f"Repeat {rand_num} times")
             for i in range(rand_num):
                 func_object(*args, **kwargs)
+
         return wrapper
+
     return inner
 
 
@@ -123,7 +125,8 @@ class ElectricPokemon(Pokemon):
         super(ElectricPokemon, self).print_details()
         print(f"SPECIES TYPE: {self.pokemon_type}")
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     p = Pokemon("pikachu", "pika")
     p.speak()
     p.speak()
